@@ -42,7 +42,7 @@ def get_codec(filepath, channel='v:0'):
 async def encode(filepath):
     path, extension = os.path.splitext(filepath)
     name = path.split('/')
-    output_filepath = encode_dir + name[len(name)-1] + '.mkv'
+    output_filepath = encode_dir + name[len(name)-1] + '.webdm'
     assert(output_filepath != filepath)
 
     if os.path.isfile(output_filepath):
@@ -51,7 +51,7 @@ async def encode(filepath):
         print('[Encode]: ' + filepath)
 
     # Codec and Bits
-    codec = '-c:v libx264 -pix_fmt yuv420p'
+    codec = '-c:v libvpx-vp9 -pix_fmt yuv420p'
 
     # CRF
     crf = f'-crf {c}'

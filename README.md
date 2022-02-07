@@ -35,7 +35,7 @@ pip3 install --no-cache-dir -r requirements.txt
 bash run.sh
 ```
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/David-raj123/Video-Encoder-Bot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/David-raj123/Video-Encoder-Bot-vp9)
 
 ### Credits
 - [ShannonScott](https://gist.github.com/ShannonScott) for [transcode_h265.py](https://gist.github.com/ShannonScott/6d807fc59bfa0356eee64fad66f9d9a8)

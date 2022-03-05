@@ -114,7 +114,7 @@ async def encode(filepath):
     # Finally
     command = ['ffmpeg', '-y', '-i', filepath]
     command.extend((resolution.split() + codec.split() + video_opts.split() +
-                   crf.split() + subtitles.split() + audio_opts.split() + speed.split() + finish.split()))
+                   crf.split() + subtitles.split() + audio_opts.split() + speed.split() + preset.split() + finish.split()))
     proc = await asyncio.create_subprocess_exec(*command, output_filepath, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
     await proc.communicate()
     return output_filepath

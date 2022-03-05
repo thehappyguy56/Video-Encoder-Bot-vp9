@@ -51,7 +51,7 @@ async def encode(filepath):
         print('[Encode]: ' + filepath)
 
     # Codec and Bits
-    codec = '-c:v libvpx-vp9 -pix_fmt yuv420p -b:v 0'
+    codec = '-map 0 -pix_fmt yuv420p10le -c:v libx265 -x265-params profile=main10'
 
     # CRF
     crf = f'-crf {c}'
@@ -101,18 +101,20 @@ async def encode(filepath):
         resolution = '-vf scale=1280:-2'
     elif r == '480':
         resolution = '-vf scale=720:-2'
+    elif r == '576':
+        resolution = '-vf scale=960:576'
     elif r == '360':
         resolution = '-vf scale=360:-2'
     else:
         resolution = ''
     
-    speed = '-quality good -speed 4 -tile-columns 4'
-    finish = '-threads 8'
+    speed = '-tune grain -aq-mode 3'
+    finish = '-y'
 
     # Finally
     command = ['ffmpeg', '-y', '-i', filepath]
-    command.extend((codec.split() + video_opts.split() +
-                   crf.split() + resolution.split() + subtitles.split() + audio_opts.split() + speed.split() + finish.split()))
+    command.extend((resolution.split() + codec.split() + video_opts.split() +
+                   crf.split() + subtitles.split() + audio_opts.split() + speed.split() + finish.split()))
     proc = await asyncio.create_subprocess_exec(*command, output_filepath, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
     await proc.communicate()
     return output_filepath
